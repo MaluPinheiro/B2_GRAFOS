@@ -7,7 +7,7 @@ if __name__ == "__main__":
     for val in dados:
         tree.insert(val)
 
-    tipoBusca = input("\nDigite o tipo de busca desejado (pre, em, pos): ").strip().lower()
+    tipoBusca = input("\nDigite o tipo de busca desejado (preOrdem, emOrdem, posOrdem): ").strip().lower()
     if tipoBusca == 'pre':
         print("\nPré Ordem:")
         tree.preorder(tree.root)
