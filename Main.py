@@ -5,7 +5,7 @@ if __name__ == "__main__":
     for i in range(N):
         dados.append(int(input(f"Digite o valor {i + 1}: ")))
     for val in dados:
-        tree.insert(val)
+        tree.inserir(val)
 
     tipoBusca = input("\nDigite o tipo de busca desejado (preOrdem, emOrdem, posOrdem): ").strip().lower()
     if tipoBusca == 'pre':
