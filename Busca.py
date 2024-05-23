@@ -9,26 +9,26 @@ class BinaryTree:
     def __init__(self):
         self.root = None
     
-    def create_node(self, data):
+    def cirar_No(self, data):
         return Node(data)
     
-    def insert(self, data):
+    def inserir(self, data):
         if self.root is None:
-            self.root = self.create_node(data)
+            self.root = self.cirar_No(data)
         else:
-            self._insert(data, self.root)
+            self._inserir(data, self.root)
     
-    def _insert(self, data, cur_node):
-        if data < cur_node.data:
-            if cur_node.left is None:
-                cur_node.left = self.create_node(data)
+    def _inserir(self, data, no_atual):
+        if data < no_atual.data:
+            if no_atual.left is None:
+                no_atual.left = self.cirar_No(data)
             else:
-                self._insert(data, cur_node.left)
-        elif data > cur_node.data:
-            if cur_node.right is None:
-                cur_node.right = self.create_node(data)
+                self._inserir(data, no_atual.left)
+        elif data > no_atual.data:
+            if no_atual.right is None:
+                no_atual.right = self.cirar_No(data)
             else:
-                self._insert(data, cur_node.right)
+                self._inserir(data, no_atual.right)
         else:
             print("Valor já existe na Árvore!")
     
