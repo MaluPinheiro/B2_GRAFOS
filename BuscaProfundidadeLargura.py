@@ -10,21 +10,27 @@ def busca_profundidade(grafo, vertice_inicial):
       for vizinho in grafo[vertice_atual]:
         if vizinho not in visitadosP:
           pilha.append(vizinho)
-  return visitadosP
+  return visitados
 
 #**BUSCA LARGURA**
-def busca_largura(grafo, vertice_inicial):
-  visitadosL = set()
-  fila = [vertice_inicial]
+from collections import deque
 
+def busca_largura(grafo, vertice_inicial):
+  # Inicialização
+  visitados = {vertice: 0 for vertice in grafo}  # Marca todos os vértices como não visitados (0)
+  predecessores = {vertice: None for vertice in grafo}  # Armazena predecessores de cada vértice
+  fila = deque([vertice_inicial])
+  visitados[vertice_inicial] = 1  # Marca o vértice inicial como visitado (1)
+
+  # Busca em Largura
   while fila:
-    vertice_atual = fila.pop(0)
-    if vertice_atual not in visitadosL:
-      visitadosL.add(vertice_atual)
-      for vizinho in grafo[vertice_atual]:
-        if vizinho not in visitadosL:
-          fila.append(vizinho)
-  return visitadosL
+      u = fila.popleft()  # Desenfileira o primeiro vértice
+      for v in grafo[u]:  # Para cada vizinho v de u
+          if visitados[v] == 0:  # Se v não foi visitado
+              visitados[v] = 1  # Marca v como visitado
+              predecessores[v] = u  # Define o predecessor de v como u
+              fila.append(v)  # Enfileira 
+  return visitados
 
 def grafo_usuario():
   # Pega o número de vértices e arestas do grafo do usuário
