@@ -1,19 +1,21 @@
-#**BUSCA PROFUNDIDADE**
-def busca_profundidade(grafo, vertice_inicial):
-  visitadosP = set()
-  pilha = [vertice_inicial]
-
-  while pilha:
-    vertice_atual = pilha.pop()
-    if vertice_atual not in visitadosP:
-      visitadosP.add(vertice_atual)
-      for vizinho in grafo[vertice_atual]:
-        if vizinho not in visitadosP:
-          pilha.append(vizinho)
-  return visitados
-
-#**BUSCA LARGURA**
 from collections import deque
+from posixpath import join
+
+# Define uma função para realizar uma busca em profundidade em um grafo a partir de um vértice inicial.
+def busca_profundidade(grafo, vertice_inicial):
+  visitados = set() # Conjunto para rastrear os vértices visitados
+  pilha = [vertice_inicial]  # Pilha para gerenciar os vértices a serem explorados, iniciando com o vértice inicial
+
+  while pilha: # Continua enquanto houver vértices na pilha
+      vertice_atual = pilha.pop() # Remove o último vértice da pilha (último a ser adicionado)
+      if vertice_atual not in visitados: # Verifica se o vértice ainda não foi visitado
+          visitados.add(vertice_atual) # Marca o vértice como visitado
+          # Adiciona os vizinhos não visitados do vértice atual na pilha
+          for vizinho in grafo[vertice_atual]:
+              if vizinho not in visitados:
+                  pilha.append(vizinho)
+
+  return visitados # Retorna o conjunto de vértices visitados
 
 def busca_largura(grafo, vertice_inicial):
   # Inicialização
@@ -29,8 +31,9 @@ def busca_largura(grafo, vertice_inicial):
           if visitados[v] == 0:  # Se v não foi visitado
               visitados[v] = 1  # Marca v como visitado
               predecessores[v] = u  # Define o predecessor de v como u
-              fila.append(v)  # Enfileira 
-  return visitados
+              fila.append(v)  # Enfileira v
+
+  return visitados # Retorna o conjunto de vértices visitados
 
 def grafo_usuario():
   # Pega o número de vértices e arestas do grafo do usuário
@@ -42,7 +45,7 @@ def grafo_usuario():
 
   # Pega as informações das arestas do grafo do usuário
   for i in range(num_arestas):
-    v1, v2 = map(int, input(f"Digite a aresta {i + 1} (v1, v2): ").split())
+    v1, v2 = map(int, input(f"Digite a aresta {i + 1} (v1 v2): ").split())
 
     # Adiciona as arestas à lista de adjacência
     if v1 not in grafo:
@@ -55,19 +58,21 @@ def grafo_usuario():
   # Pega o vértice inicial da busca do usuário
   vertice_inicial = int(input("Digite o vértice inicial da busca: "))
 
-  # Realiza a busca em profundidade e largura
-  visitadosP = busca_profundidade(grafo, vertice_inicial)
-  visitadosL = busca_largura(grafo, vertice_inicial)
-
+  # Solicita ao usuário o tipo de busca (profundidade ou largura)
   escolha_busca = (input("\nEntre com o tipo de Busca (profundidade ou largura): ")).strip().lower()
 
+  # Realiza a busca em profundidade se o usuário escolher 'profundidade'
   if escolha_busca == 'profundidade':
+    visitadosP = busca_profundidade(grafo, vertice_inicial)
     # Imprime os vértices visitados
     print("Vértices visitados:", visitadosP)
+  # Realiza a busca em largura se o usuário escolher 'largura'
   elif escolha_busca == 'largura':
+    visitadosL = busca_largura(grafo, vertice_inicial)
     # Imprime os vértices visitados
     print("Vértices visitados:", visitadosL)
   else:
     print("Tipo de busca inválido, tente novamente.")
 
+# Chama a função principal que interage com o usuário e realiza a busca no grafo
 grafo_usuario()
